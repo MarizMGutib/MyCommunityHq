@@ -8,7 +8,7 @@ const Navbar = () => {
       <div className="flex flex-wrap items-center ">
         <div className="flex items-center">
           <Image
-            className="w-[180px] h-[100px] pl-6"
+            className="w-[150px] h-[80px] pl-6"
             src="/option 2.png"
             width={250} 
             height={100}
@@ -34,8 +34,10 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="flex-grow flex pl-[40rem] text-xl">
-          <Link className='hover:text-[#1B0EB4] py-[.2rem] font-Poppins tracking-wide ' href="/login">Profile</Link>
+        <div className="flex flex-grow-40 pl-[51rem]  ">
+        <Link className='hover:text-[#1B0EB4] text-xl ' href="/profile'">
+          <img src="/profile.png"></img>
+          </Link>
         </div>
       </div>
     </main>
