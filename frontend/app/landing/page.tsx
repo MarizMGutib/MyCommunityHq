@@ -1,21 +1,34 @@
 "use client"
 import React, { useState } from 'react';
-import Image from 'next/image';
 
 const Landing = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // State for password visibility
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const openModal = () => {
-    setShowModal(true);
+  const openLoginModal = () => {
+    setShowLoginModal(true);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
+  const closeLoginModal = () => {
+    setShowLoginModal(false);
+  };
+
+  const openSignUpModal = () => {
+    setShowSignUpModal(true);
+  };
+
+  const closeSignUpModal = () => {
+    setShowSignUpModal(false);
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const closeModal = () => {
+    closeLoginModal();
+    closeSignUpModal();
   };
 
   return (
@@ -39,16 +52,79 @@ const Landing = () => {
           <img src="/img1_landing.png" alt="image" className="w-[90rem] h-[50rem]" />
         </div>
         <div className='flex pr-20'>
-          <button className='bg-white w-[9rem] h-10 rounded-full pr-20' onClick={openModal}>Sign Up</button>
+          <button className='bg-white w-[9rem] h-10 rounded-full pr-20' onClick={openSignUpModal}>Sign Up</button>
         </div>
         <div className='absolute pl-[110rem]'>
-          <button className='bg-[#854df4] h-10 w-[6rem] rounded-full text-white' onClick={openModal}>Login</button>
+          <button className='bg-[#854df4] h-10 w-[6rem] rounded-full text-white' onClick={openLoginModal}>Login</button>
         </div>
       </div>
-      {showModal && (
-        <div className="fixed top-0 left-0 w-full h-full  bg-black bg-opacity-50 flex items-center justify-center z-50">
+      
+      {showSignUpModal && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8">
+            <h2 className="text-2xl font-bold mb-4">Sign up for an Account</h2>
+           
+<div className="bg-grey-lighter min-h-screen flex flex-col">
+            <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+                <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                    <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+                    <input 
+                        type="text"
+                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                        name="fullname"
+                        placeholder="Full Name" />
+
+                    <input 
+                        type="text"
+                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                        name="email"
+                        placeholder="Email" />
+
+                    <input 
+                        type="password"
+                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                        name="password"
+                        placeholder="Password" />
+                    <input 
+                        type="password"
+                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                        name="confirm_password"
+                        placeholder="Confirm Password" />
+
+                    <button
+                        type="submit"
+                        className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
+                    >Create Account</button>
+
+                    <div className="text-center text-sm text-grey-dark mt-4">
+                        By signing up, you agree to the 
+                        <a className="no-underline border-b border-grey-dark text-grey-dark" href="#">
+                            Terms of Service
+                        </a> and 
+                        <a className="no-underline border-b border-grey-dark text-grey-dark" href="#">
+                            Privacy Policy
+                        </a>
+                    </div>
+                </div>
+
+                <div className="text-grey-dark mt-6">
+                    Already have an account? 
+                    <a className="no-underline border-b border-blue text-blue" href="../login/">
+                        Log in
+                    </a>.
+                </div>
+            </div>
+        </div>
+            <button className="bg-[#854df4] text-white rounded-full px-4 py-2 mt-4" onClick={closeModal}>Back</button>
+          </div>
+        </div>
+      )}
+
+      {showLoginModal && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8">
             <h2 className="text-2xl font-bold mb-4">Log in to your Account</h2>
+           
             <p>Welcome back! Select method to log in</p>
             <div className='flex space-x-4 pt-12'>
               <div>
@@ -81,14 +157,14 @@ const Landing = () => {
                     <input 
                       className="shadow appearance-none border border-indigo-900 rounded-full w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
                       id="password" 
-                      type={showPassword ? "text" : "password"} // Toggle between "text" and "password"
+                      type={showPassword ? "text" : "password"}
                       placeholder="Enter Password" 
                     />
                     <img 
                       src="/visible.png" 
                       alt="eye" 
                       className="absolute right-2 top-2 cursor-pointer pt-2"
-                      onClick={togglePasswordVisibility} // Toggle password visibility when the eye icon is clicked
+                      onClick={togglePasswordVisibility} 
                     />
                   </div>
                 </div>
@@ -99,13 +175,13 @@ const Landing = () => {
                     <button className='dark:text-gray-300 text-sm pl-4'>Forgot Password?</button>
                   </div>
                 </div>
+                </form>
                 <div className='flex items-center justify-center pt-8 '>
                   <button className='bg-[#854df4] h-8 w-80 text-white rounded-full'>Log in</button>
                 </div>
-                <button className="bg-[#854df4] text-white rounded-full px-4 py-2 mt-4" onClick={closeModal}>Back</button>
-              </form>
-            </div>
+            <button className="bg-[#854df4] text-white rounded-full px-4 py-2 mt-4" onClick={closeModal}>Back</button>
           </div>
+        </div>
         </div>
       )}
     </div>
@@ -113,3 +189,4 @@ const Landing = () => {
 };
 
 export default Landing;
+
