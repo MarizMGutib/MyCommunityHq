@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 const Landing = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // State for password visibility
 
   const openModal = () => {
     setShowModal(true);
@@ -11,6 +12,10 @@ const Landing = () => {
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -41,16 +46,18 @@ const Landing = () => {
         </div>
       </div>
       {showModal && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed top-0 left-0 w-full h-full  bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8">
             <h2 className="text-2xl font-bold mb-4">Log in to your Account</h2>
             <p>Welcome back! Select method to log in</p>
             <div className='flex space-x-4 pt-12'>
               <div>
-                <button className='border w-40 h-14 rounded-full'>Google</button>
+                <img src="/google.png" alt="Google" className='w-16 absolute pt-[0.2rem] pl-4'/>
+                <button className='border w-40 h-14 rounded-full pl-8'>Google</button>
               </div>
               <div>
-                <button className='border w-40 h-14 rounded-full'>Facebook</button>
+              <img src="/fb.png" alt="Facebook" className='w-[3.4rem] absolute pt-[0.6rem] pl-4'/>
+                <button className='border w-40 h-14 rounded-full pl-10'>Facebook</button>
               </div>
             </div>
             <div className="flex items-center space-x-120 pt-6">
@@ -70,18 +77,27 @@ const Landing = () => {
                   <label className="block text-gray-300 text-normal font-Poppins mb-2" htmlFor="password">
                     Password
                   </label>
-                  <input className="shadow appearance-none border border-indigo-900  rounded-full w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Enter Password" />
+                  <div className="relative">
+                    <input 
+                      className="shadow appearance-none border border-indigo-900 rounded-full w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+                      id="password" 
+                      type={showPassword ? "text" : "password"} // Toggle between "text" and "password"
+                      placeholder="Enter Password" 
+                    />
+                    <img 
+                      src="/visible.png" 
+                      alt="eye" 
+                      className="absolute right-2 top-2 cursor-pointer pt-2"
+                      onClick={togglePasswordVisibility} // Toggle password visibility when the eye icon is clicked
+                    />
+                  </div>
                 </div>
                 <div>
-                <div className="flex items-center">
-    
-<div className="flex items-center">
-    <input id="link-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-    </input>
-    <label htmlFor="link-checkbox" className="ms-2 text-sm text-gray-900 dark:text-gray-300">Remember me</label>
-    <button className=' dark:text-gray-300 text-sm pl-4'>Forgot Password?</button>
-</div>
-</div>
+                  <div className="flex items-center">
+                    <input id="link-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    <label htmlFor="link-checkbox" className="ms-2 text-sm text-gray-900 dark:text-gray-300">Remember me</label>
+                    <button className='dark:text-gray-300 text-sm pl-4'>Forgot Password?</button>
+                  </div>
                 </div>
                 <div className='flex items-center justify-center pt-8 '>
                   <button className='bg-[#854df4] h-8 w-80 text-white rounded-full'>Log in</button>
