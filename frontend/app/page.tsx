@@ -8,6 +8,7 @@ export default function Home() {
     <>
     <Header/>
   <main>
+    <div>Hello Worlds</div>
     <Homepage/>
     <Footer/>
     </main>
